@@ -3,14 +3,84 @@
 <head>
 	<title>testr3</title>
 	<style type="text/css">
+		canvas{
+			background-color: black;
+		}
 		body{
-			background-color:red;
-			color:blue;
+			margin-left: 0px;
+			margin-top: 0px;
+			margin-right: 0px;
+			margin-bottom: 
 		}
 	</style>
 </head>
 <body>
-hello world!!!!!!!!!!!
+<canvas></canvas>
+<script type="text/javascript">
+var canvas=document.querySelector('canvas');
+canvas.height=window.innerHeight;
+canvas.width=window.innerWidth;
+var a=canvas.getContext('2d');
+function fun(x,y,dx,dy,radius){
+	this.x=x;
+	this.y=y;
+	this.dx=dx;
+	this.dy=dy;
+	this.radius=radius;
+ 	this.draw=function(){
+ 	a.strokeStyle="red";
+ 	a.lineWidth=2;
+	a.beginPath();
+	a.arc(this.x,this.y,this.radius,0,7);
+	a.stroke();
+ 	}
+ 	this.update=function(){
+		if(this.x+this.radius>innerWidth ||  this.x-this.radius<0){
+		this.dx=-this.dx;
+
+		}
+		if(this.y+this.radius>innerHeight ||  this.y-this.radius<0){
+		this.dy=-this.dy;
+
+		}
+		this.x+=this.dx;
+		this.y+=this.dy;	
+		this.draw();
+		}
+}
+var carr=[];
+for(let i=0;i<10;i++){
+	var x=Math.random()*innerWidth;
+	var y=Math.random()*innerHeight;
+	var dy=(Math.random()-0.5)*8;
+	var dx=(Math.random()-0.5)*8;
+	var radius=50;
+	carr.push(new fun(x,y,dx,dy,radius));
+}
+function anime(){
+	requestAnimationFrame(anime);
+	a.clearRect(0,0,innerWidth,innerHeight);
+	for(let i=0;i<carr.length;i++){
+		carr[i].update();
+	}
+	
+	
+}
+
+anime();
+/*for(let i=0;i<10;i++){
+	var x=Math.floor(Math.random()*canvas.width);
+	var y=Math.floor(Math.random()*canvas.height);
+	a.beginPath();
+	a.strokeStyle="red";
+	a.arc(x,y,Math.floor(Math.random()*20),0,7);
+	a.lineWidth=2;
+	a.stroke();
+	
+	
+}*/
+
+</script>
 </body>
 </html>
 
