@@ -1,88 +1,171 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>testr3</title>
-	<link rel="icon" href="https://pngimg.com/uploads/exclamation_mark/exclamation_mark_PNG39.png">
-	<style type="text/css">
-		canvas{
-			background-color: black;
-		}
-		body{
-			margin-left: 0px;
-			margin-top: 0px;
-			margin-right: 0px;
-			margin-bottom: 
-		}
-	</style>
+  <link rel="icon" href="https://pngimg.com/uploads/exclamation_mark/exclamation_mark_PNG39.png">
+  <title>kum!</title>
+  <style type="text/css">
+    body{
+      background-color: black;
+    }
+    #rone button{
+      font-size: 5vw;
+      border-color: red;
+      background-color: yellow;
+      height: 7vw;
+      width: 7vw;
+    }
+    #rtwo button{
+      font-size: 5vw;
+      border-color: red;
+      background-color: yellow;
+      height: 7vw;
+      width: 7vw;
+    }
+    #rthree button{
+      font-size: 5vw;
+      border-color: red;
+      background-color: yellow;
+      height: 7vw;
+      width: 7vw;
+    }
+    b{
+      color:blue;
+      font-size: 4vw;
+      animation:b 1s infinite alternate ;
+      animation-timing-function: ease-in-out;
+    }
+    h1{
+      color: red;
+    }
+    .s{
+      animation:a 1s infinite alternate;
+      animation-timing-function: ease-in-out;
+    }
+    @keyframes a{
+      to{transform: scale(0.7);color: gold}
+    }   
+  </style>
 </head>
 <body>
-<canvas></canvas>
+<center>
+  <b>XO Game.....!(Two Player)</b><br><br>
+  <div id="ctrl">
+    <div id="rone">
+    <button id="aa">--</button>
+    <button id="ab">--</button>
+    <button id="ac">--</button>
+    </div>
+    <div id="rtwo">
+    <button id="ba">--</button>
+    <button id="bb">--</button>
+    <button id="bc">--</button>
+    </div>
+    <div id="rthree">
+    <button id="ca">--</button>
+    <button id="cb">--</button>
+    <button id="cc">--</button>
+    </div>
+    <h1 id="worl"></h1>
+  </div>
+</center>
+<script src="anime.js"></script>
 <script type="text/javascript">
-var canvas=document.querySelector('canvas');
-canvas.height=window.innerHeight;
-canvas.width=window.innerWidth;
-var a=canvas.getContext('2d');
-function fun(x,y,dx,dy,radius){
-	this.x=x;
-	this.y=y;
-	this.dx=dx;
-	this.dy=dy;
-	this.radius=radius;
- 	this.draw=function(){
- 	a.strokeStyle="red";
- 	a.lineWidth=2;
-	a.beginPath();
-	a.arc(this.x,this.y,this.radius,0,7);
-	a.stroke();
- 	}
- 	this.update=function(){
-		if(this.x+this.radius>innerWidth ||  this.x-this.radius<0){
-		this.dx=-this.dx;
-
-		}
-		if(this.y+this.radius>innerHeight ||  this.y-this.radius<0){
-		this.dy=-this.dy;
-
-		}
-		this.x+=this.dx;
-		this.y+=this.dy;	
-		this.draw();
-		}
+  var x=0;
+  var o=0;
+  function add(){
+  x=0;
+  o=0;
+  document.getElementById('worl').className='s';
+  document.getElementById('worl').innerHTML="";
+  document.getElementById('aa').innerHTML="--";
+  document.getElementById('ab').innerHTML="--";
+  document.getElementById('ac').innerHTML="--";
+  document.getElementById('ba').innerHTML="--";
+  document.getElementById('bb').innerHTML="--";
+  document.getElementById('bc').innerHTML="--";
+  document.getElementById('ca').innerHTML="--";
+  document.getElementById('cb').innerHTML="--";
+  document.getElementById('cc').innerHTML="--";
+  document.getElementById('aa').addEventListener('click',function(){chk(this.id);});
+  document.getElementById('ab').addEventListener('click',function(){chk(this.id);});
+  document.getElementById('ac').addEventListener('click',function(){chk(this.id);});
+  document.getElementById('ba').addEventListener('click',function(){chk(this.id);});
+  document.getElementById('bb').addEventListener('click',function(){chk(this.id);});
+  document.getElementById('bc').addEventListener('click',function(){chk(this.id);});
+  document.getElementById('ca').addEventListener('click',function(){chk(this.id);});
+  document.getElementById('cb').addEventListener('click',function(){chk(this.id);});
+  document.getElementById('cc').addEventListener('click',function(){chk(this.id);});
+  window.removeEventListener('click',add);
 }
-var carr=[];
-for(let i=0;i<10;i++){
-	var x=Math.random()*innerWidth;
-	var y=Math.random()*innerHeight;
-	var dy=(Math.random()-0.5)*8;
-	var dx=(Math.random()-0.5)*8;
-	var radius=50;
-	carr.push(new fun(x,y,dx,dy,radius));
-}
-function anime(){
-	requestAnimationFrame(anime);
-	a.clearRect(0,0,innerWidth,innerHeight);
-	for(let i=0;i<carr.length;i++){
-		carr[i].update();
-	}
-	
-	
-}
-
-anime();
-/*for(let i=0;i<10;i++){
-	var x=Math.floor(Math.random()*canvas.width);
-	var y=Math.floor(Math.random()*canvas.height);
-	a.beginPath();
-	a.strokeStyle="red";
-	a.arc(x,y,Math.floor(Math.random()*20),0,7);
-	a.lineWidth=2;
-	a.stroke();
-	
-	
-}*/
-
+function del(){
+  setTimeout(function(){window.addEventListener('click',add);},0);
+  }
+add();
+  function chk(id){
+    if(document.getElementById(id).innerHTML==="--" && x===0){
+      document.getElementById(id).innerHTML="x";
+      document.getElementById('worl').innerHTML="";
+      x=1;
+      o=0;
+      if(winloss("x")===true){
+        document.getElementById('worl').className='s';
+        document.getElementById('worl').innerHTML="x won the game........!";
+        del();
+    }
+      else if(draw()){
+        document.getElementById('worl').className='s';
+        document.getElementById('worl').innerHTML="xo draw........!";
+        del();
+      }
+    }else if(document.getElementById(id).innerHTML==="--" && o===0){
+      document.getElementById(id).innerHTML="o";
+      o=1;
+      x=0;
+      if(winloss("o")===true){
+        document.getElementById('worl').className='s';
+        document.getElementById('worl').innerHTML="o won the game........!";
+        del();
+    }
+      else if(draw()){
+        document.getElementById('worl').className='s';
+        document.getElementById('worl').innerHTML="xo draw........!";
+        del();
+      }
+    }
+  }
+  function winloss(get){
+    if(document.getElementById('aa').innerHTML===get && document.getElementById('ab').innerHTML===get && document.getElementById('ac').innerHTML===get){
+      return true;
+    }else if(document.getElementById('ba').innerHTML===get && document.getElementById('bb').innerHTML===get && document.getElementById('bc').innerHTML===get){
+      return true;
+    }else if(document.getElementById('ca').innerHTML===get && document.getElementById('cb').innerHTML===get && document.getElementById('cc').innerHTML===get){
+      return true;
+    }else if(document.getElementById('aa').innerHTML===get && document.getElementById('ba').innerHTML===get && document.getElementById('ca').innerHTML===get){
+      return true;
+    }else if(document.getElementById('ab').innerHTML===get && document.getElementById('bb').innerHTML===get && document.getElementById('cb').innerHTML===get){
+      return true;
+    }else if(document.getElementById('ac').innerHTML===get && document.getElementById('bc').innerHTML===get && document.getElementById('cc').innerHTML===get){
+      return true;
+    }else if(document.getElementById('aa').innerHTML===get && document.getElementById('bb').innerHTML===get && document.getElementById('cc').innerHTML===get){
+      return true;
+    }else if(document.getElementById('ac').innerHTML===get && document.getElementById('bb').innerHTML===get && document.getElementById('ca').innerHTML===get){
+      return true;
+    }
+  }
+  function draw(){
+    if((document.getElementById('aa').innerHTML==="x" || document.getElementById('aa').innerHTML==="o")&&
+       (document.getElementById('ab').innerHTML==="x" || document.getElementById('ab').innerHTML==="o")&&
+       (document.getElementById('ac').innerHTML==="x" || document.getElementById('ac').innerHTML==="o")&&
+       (document.getElementById('ba').innerHTML==="x" || document.getElementById('ba').innerHTML==="o")&&
+       (document.getElementById('bb').innerHTML==="x" || document.getElementById('bb').innerHTML==="o")&&
+       (document.getElementById('bc').innerHTML==="x" || document.getElementById('bc').innerHTML==="o")&&
+       (document.getElementById('ca').innerHTML==="x" || document.getElementById('ca').innerHTML==="o")&&
+       (document.getElementById('cb').innerHTML==="x" || document.getElementById('cb').innerHTML==="o")&&
+       (document.getElementById('cc').innerHTML==="x" || document.getElementById('cc').innerHTML==="o") 
+       ){
+          return true;
+    }
+  }
 </script>
 </body>
 </html>
-
-
