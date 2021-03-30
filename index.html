@@ -20,7 +20,7 @@
                 id="animated-marker"
                 type="pattern"
                 preset="custom"
-                url="marker.patt"
+                url="marker1.patt"
                 raycaster="objects: .clickable"
                 emitevents="true"
                 cursor="fuse: false; rayOrigin: mouse;"
@@ -33,6 +33,38 @@
                     rotation="-90 0 0"
                     gesture-handler
                 ></a-image>
+            </a-marker>
+
+            <a-entity camera></a-entity>
+            
+            /////second ar ////                        
+            
+            
+             <a-assets>
+                <a-asset-item
+                    id="animated-asset"
+                    src="asset.glb"
+                ></a-asset-item>
+            </a-assets>
+
+            <a-marker
+                id="animated-marker"
+                type="pattern"
+                preset="custom"
+                url="marker2.patt"
+                raycaster="objects: .clickable"
+                emitevents="true"
+                cursor="fuse: false; rayOrigin: mouse;"
+                id="markerA"
+            >
+                <a-entity
+                    id="bowser-model"
+                    scale="2.605715642804458 2.605715642804458 2.605715642804458"
+                    animation-mixer="loop: repeat"
+                    gltf-model="#animated-asset"
+                    class="clickable"
+                    gesture-handler
+                ></a-entity>
             </a-marker>
 
             <a-entity camera></a-entity>
