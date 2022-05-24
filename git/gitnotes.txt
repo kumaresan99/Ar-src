@@ -1,0 +1,21 @@
+🟢branch cmds
+  *add,delete,rename branch -> local(vs)
+      # add branch -> git checkout -b branchname
+      # delete branch -> git branch -D branchname
+      # rename branch -> git branch -m branchname
+      
+   *add,delete,rename branch -> mainhub(github)
+      # add branch -> git push origin branchname -->[add local first]
+      # delete branch -> git push --delete origin branchname -->[add local first]
+      # rename branch > git push origin branchname -->[add local first] 
+    
+ 🟢stage file cmd
+     # stage file -> git add * (or) filename;
+ 
+ 🟢commit cmd
+     # git commit -m 'messages'
+ 
+ 🟢uninitialize git cmd
+     # rm .git
+     # rd .git
+     
